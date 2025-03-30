@@ -1,13 +1,14 @@
 .eight-ball {
   position: relative;
   border-radius: 100%;
-  padding: 50px;
+  padding: 150px;
   border: 1px solid lime;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 450px;
-  height: 450px;
+  max-width: 450px;
+  max-height: 450px;
+  height: 100%;
 
   &__spin-btn {
     position: absolute;
@@ -67,6 +68,7 @@
   }
 
   &__prediction-text {
+    text-align: center;
     margin: 0;
     margin-bottom: 40px;
     opacity: 1;

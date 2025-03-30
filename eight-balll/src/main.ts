@@ -1,10 +1,11 @@
 import { Answer, Language, AnswerGroups } from "./types.ts";
 import './styles/main.scss'
 import { MAGIC_8_BALL_ANSWERS } from "./answers.ts";
-import { getRandomArrayItem } from "./utils.ts";
+import { ShakeDetector, getRandomArrayItem } from "./utils.ts";
 
 const LANG: Language = 'ru';
 
+// Initialize shake detection
 const spinButton: HTMLButtonElement | null = document.querySelector('.eight-ball__spin-btn');
 const resetButton = document.querySelector('.eight-ball__reset-btn');
 const predictionElement = document.querySelector('.eight-ball__prediction');
@@ -23,7 +24,9 @@ const getRandomAnswer = async (arr: AnswerGroups): Promise<string> => {
   });
 }
 
+
 const handleSpin = async () => {
+
   spinButton?.classList.add('eight-ball__spin-btn--hidden');
   await new Promise(resolve => setTimeout(resolve, 300));
 
@@ -41,8 +44,10 @@ const handleSpin = async () => {
     predictionTextElement.classList.remove('eight-ball__prediction-text--hidden');
 
   }
-
 };
+
+const shakeDetector = new ShakeDetector(handleSpin);
+
 
 const handleReset = async () => {
   predictionElement?.classList.remove('eight-ball__prediction--active');
@@ -52,3 +57,6 @@ const handleReset = async () => {
 
 spinButton?.addEventListener('click', handleSpin)
 resetButton?.addEventListener('click', handleReset)
+document.addEventListener('DOMContentLoaded', () => {
+  shakeDetector.start();
+});
