@@ -2,6 +2,7 @@ import { Answer, Language, AnswerGroups } from "./types.ts";
 import './styles/main.scss'
 import { MAGIC_8_BALL_ANSWERS } from "./answers.ts";
 import { ShakeDetector, getRandomArrayItem } from "./utils.ts";
+import { DragHandler } from './utils/DragHandler';
 
 const LANG: Language = 'ru';
 
@@ -10,6 +11,8 @@ const spinButton: HTMLButtonElement | null = document.querySelector('.eight-ball
 const resetButton = document.querySelector('.eight-ball__reset-btn');
 const predictionElement = document.querySelector('.eight-ball__prediction');
 const predictionTextElement = document.querySelector('.eight-ball__prediction-text');
+const eightBallElement = document.querySelector('.eight-ball') as HTMLElement;
+
 
 
 const getRandomAnswer = async (arr: AnswerGroups): Promise<string> => {
@@ -60,3 +63,7 @@ resetButton?.addEventListener('click', handleReset)
 document.addEventListener('DOMContentLoaded', () => {
   shakeDetector.start();
 });
+
+if (eightBallElement) {
+  new DragHandler(eightBallElement, handleSpin);
+}

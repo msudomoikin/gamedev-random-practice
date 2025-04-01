@@ -80,3 +80,4 @@ export const vibrate = (pattern: number | number[]): void => {
   }
   navigator.vibrate(pattern);
 };
+
